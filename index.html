@@ -1,0 +1,3444 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MTGarden — zahradní architektura, výsadba a údržba zahrad. Praha a Středočeský kraj. 12 let zkušeností, 150+ realizací.">
+<meta name="keywords" content="zahradní architektura, návrh zahrady, výsadba, kácení stromů, údržba zahrad, Praha, Středočeský kraj">
+<meta property="og:title" content="MTGarden — Zahrady, které žijí.">
+<meta property="og:description" content="Projektujeme a realizujeme zahrady s citem pro přírodu. Každý projekt je jedinečný.">
+<meta property="og:image" content="images/hero-bazenova-zona.jpg">
+<title>MTGarden — Zahrady, které žijí.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ======================================================
+   RESET & BASE
+====================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--cream);
+  overflow-x: hidden;
+  cursor: none;
+}
+img { max-width: 100%; display: block; height: auto; }
+button, input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+button { background: none; border: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+/* ======================================================
+   DESIGN TOKENS
+====================================================== */
+:root {
+  /* Backgrounds — all light */
+  --cream: #ffffff;
+  --cream-light: #fafaf7;
+  --cream-dark: #f5f8ee;
+  --bg-tint: #eaf2db;
+  --bg-tint-strong: #d8e6bd;
+
+  /* Greens — fresh, vibrant, leafy (WhatsApp-inspired but natural) */
+  --green-deep: #3d6f24;
+  --green-primary: #5d9b3f;
+  --green-mid: #6fa84c;
+  --green-accent: #88b964;
+  --green-soft: #b4d189;
+  --green-mint: #d6e6b5;
+
+  /* Text — dark with green undertone */
+  --charcoal: #1a2515;
+  --charcoal-soft: #2a3520;
+  --text-dark: #1f2e18;
+  --text-muted: #6e7c64;
+  --line: rgba(61, 111, 36, 0.14);
+  --line-strong: rgba(61, 111, 36, 0.26);
+
+  /* Spacing */
+  --container: 1320px;
+  --container-narrow: 1080px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-y: clamp(5rem, 12vw, 9rem);
+
+  /* Type scale */
+  --display-xl: clamp(3.5rem, 11vw, 11.5rem);
+  --display-l: clamp(2.75rem, 7vw, 6.5rem);
+  --display-m: clamp(2.25rem, 5vw, 4.25rem);
+  --display-s: clamp(1.75rem, 3.2vw, 2.75rem);
+  --h-eyebrow: 0.78rem;
+
+  /* Effects */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-card: 0 10px 40px rgba(45, 80, 25, 0.06), 0 2px 8px rgba(45, 80, 25, 0.04);
+  --shadow-elev: 0 30px 80px rgba(45, 80, 25, 0.15), 0 6px 20px rgba(45, 80, 25, 0.08);
+  --radius: 4px;
+  --nav-h: 80px;
+}
+
+/* ======================================================
+   TYPOGRAPHY
+====================================================== */
+.eyebrow {
+  font-size: var(--h-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--green-mid);
+  display: inline-block;
+}
+.eyebrow.center { justify-content: center; }
+.eyebrow.light { color: var(--green-soft); }
+.eyebrow.light::before { background: var(--green-soft); }
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--text-dark);
+}
+.h-display {
+  font-size: var(--display-xl);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+.h-1 { font-size: var(--display-l); font-weight: 800; }
+.h-2 { font-size: var(--display-m); font-weight: 800; }
+.h-3 { font-size: var(--display-s); font-weight: 700; }
+.h-italic-thin {
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: -0.03em;
+}
+.text-accent { color: var(--green-mid); }
+.text-light { color: var(--cream-light); }
+.text-muted { color: var(--text-muted); }
+p.lead { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.55; color: var(--text-muted); max-width: 60ch; }
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+section { position: relative; }
+
+/* ======================================================
+   CUSTOM CURSOR
+====================================================== */
+.cursor-dot, .cursor-outline {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.3s ease, background 0.3s ease;
+}
+body.cursor-active .cursor-dot, body.cursor-active .cursor-outline { opacity: 1; }
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--green-deep);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.3s ease;
+}
+.cursor-outline {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(61, 111, 36, 0.55);
+  transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.3s ease, background 0.3s ease;
+}
+body.dark-cursor .cursor-dot { background: var(--cream); }
+body.dark-cursor .cursor-outline { border-color: rgba(244, 237, 224, 0.55); }
+body.cursor-hover .cursor-dot { width: 0; height: 0; }
+body.cursor-hover .cursor-outline { width: 70px; height: 70px; background: rgba(136, 185, 100, 0.22); border-color: var(--green-accent); }
+body.cursor-text .cursor-dot { width: 2px; height: 22px; border-radius: 1px; }
+body.cursor-text .cursor-outline { width: 0; height: 0; border-color: transparent; }
+@media (max-width: 980px), (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-outline { display: none; }
+}
+
+/* ======================================================
+   NAVIGATION
+====================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gutter);
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), border-color 0.4s var(--ease), color 0.4s var(--ease);
+  border-bottom: 1px solid transparent;
+  /* Default (subpages, scrolled state): dark text + white glass */
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom-color: var(--line);
+}
+.nav .logo, .nav .nav-link { color: inherit; }
+.nav .logo-mark { background: var(--green-deep); color: var(--cream); }
+.nav .nav-toggle span { background: currentColor; }
+.nav .btn-primary { background: var(--green-deep); color: var(--cream); }
+
+/* Nav has consistent appearance on all pages (cream glass + dark text) */
+.nav-inner {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--green-deep);
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+  font-size: 0.7rem;
+  font-weight: 800;
+  transition: transform 0.4s var(--ease), background 0.3s ease;
+}
+.logo:hover .logo-mark { transform: rotate(180deg); }
+.logo b { font-weight: 800; }
+.logo span { font-weight: 300; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav-link {
+  position: relative;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.4rem 0;
+  transition: color 0.3s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--green-deep);
+  transition: width 0.4s var(--ease);
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  transition: all 0.4s var(--ease);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--green-deep);
+  color: var(--cream);
+}
+.btn-primary:hover {
+  background: #1f2d1a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(61, 111, 36, 0.35);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text-dark);
+  border-color: var(--line-strong);
+}
+.btn-secondary:hover {
+  background: var(--green-deep);
+  color: var(--cream);
+  border-color: var(--green-deep);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  padding: 0.5rem 0;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 0.85rem;
+}
+.btn-ghost:hover { border-bottom-color: var(--green-deep); }
+.btn .arrow {
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+.nav-toggle {
+  display: none;
+  width: 28px;
+  height: 22px;
+  position: relative;
+}
+.nav-toggle span {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1.5px;
+  background: var(--text-dark);
+  transition: transform 0.4s var(--ease), opacity 0.3s ease, top 0.4s var(--ease);
+}
+.nav-toggle span:nth-child(1) { top: 4px; }
+.nav-toggle span:nth-child(2) { top: 50%; }
+.nav-toggle span:nth-child(3) { top: calc(100% - 5px); }
+body.menu-open .nav-toggle span:nth-child(1) { top: 50%; transform: rotate(45deg); }
+body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+body.menu-open .nav-toggle span:nth-child(3) { top: 50%; transform: rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - var(--nav-h));
+    height: calc(100dvh - var(--nav-h));
+    background: var(--cream);
+    color: var(--text-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 2rem var(--gutter);
+    transform: translateX(100%);
+    transition: transform 0.5s var(--ease);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.menu-open .nav-links { transform: translateX(0); }
+  /* When menu is open, nav becomes solid white (no glass) */
+  body.menu-open .nav {
+    background: var(--cream) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--text-dark) !important;
+    border-bottom-color: var(--line) !important;
+  }
+  body.menu-open .nav .logo-mark { background: var(--green-deep) !important; color: var(--cream) !important; }
+  /* Prevent background scroll when menu is open */
+  body.menu-open { overflow: hidden; }
+
+  .nav-links .nav-link {
+    color: var(--text-dark);
+    width: 100%;
+    padding: 1.2rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-link::after { display: none; }
+  .nav-links .btn-primary {
+    margin-top: 1.5rem;
+    background: var(--green-deep);
+    color: var(--cream);
+  }
+}
+
+/* ======================================================
+   PAGE SYSTEM
+====================================================== */
+.page {
+  display: none;
+  opacity: 0;
+  animation: pageIn 0.6s var(--ease) forwards;
+}
+.page.active { display: block; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+main { padding-top: 0; }
+
+/* ======================================================
+   HERO — HOMEPAGE
+====================================================== */
+.hero {
+  position: relative;
+  background: var(--cream);
+  padding: calc(var(--nav-h) + clamp(2.5rem, 5vw, 4.5rem)) 0 clamp(3rem, 6vw, 5rem);
+  overflow: hidden;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-decor-num {
+  position: absolute;
+  top: 50%;
+  right: -2rem;
+  transform: translateY(-50%);
+  font-size: clamp(20rem, 36vw, 40rem);
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(61, 111, 36, 0.045);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+}
+.hero-text { max-width: none; }
+.hero-text .eyebrow {
+  color: var(--green-mid);
+  margin-bottom: clamp(1.25rem, 2vw, 2rem);
+}
+.hero-text .eyebrow::before { background: var(--green-mid); }
+.hero-title {
+  color: var(--text-dark);
+  font-size: clamp(2.75rem, 8.5vw, 8.75rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  margin-bottom: clamp(1.25rem, 2vw, 1.75rem);
+}
+.hero-title .italic {
+  display: block;
+  font-style: italic;
+  font-weight: 200;
+  color: var(--green-primary);
+  letter-spacing: -0.035em;
+}
+.hero-lead {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.65;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero-actions .btn-primary {
+  background: var(--green-deep);
+  color: var(--cream);
+}
+.hero-actions .btn-primary:hover {
+  background: var(--green-primary);
+  color: var(--cream);
+}
+.hero-actions .btn-secondary {
+  color: var(--text-dark);
+  border-color: var(--line-strong);
+}
+.hero-actions .btn-secondary:hover {
+  background: var(--green-deep);
+  color: var(--cream);
+  border-color: var(--green-deep);
+}
+
+/* HERO PHOTO — contained, framed */
+.hero-visual {
+  position: relative;
+}
+.hero-photo {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--bg-tint);
+  box-shadow: 0 30px 80px rgba(45, 80, 25, 0.12), 0 8px 20px rgba(45, 80, 25, 0.06);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+  transition: transform 1.5s var(--ease);
+}
+.hero-photo:hover img { transform: scale(1.04); }
+.hero-photo-meta {
+  position: absolute;
+  left: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.hero-photo-label { color: var(--green-deep); }
+.hero-photo-place { color: var(--text-muted); font-weight: 500; letter-spacing: 0.06em; }
+.hero-photo-meta { padding: 0.6rem 1.1rem; }
+.hero-photo-meta { flex-direction: row; align-items: center; gap: 0.75rem; }
+.hero-photo-place::before { content: '·'; margin-right: 0.5rem; color: var(--text-muted); }
+
+/* HERO STATS STRIP — minimal, inline */
+.hero-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+.hero-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: clamp(1rem, 2vw, 2rem);
+  border-right: 1px solid var(--line);
+}
+.hero-stat-item:last-child { border-right: none; }
+.hero-stat-item strong {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--green-deep);
+  font-style: italic;
+}
+.hero-stat-item span {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3rem); }
+  .hero-photo { aspect-ratio: 4/3; max-width: 100%; }
+  .hero-photo img { object-position: center 50%; }
+}
+@media (max-width: 480px) {
+  .hero-photo-place { display: none; }
+}
+@media (max-width: 600px) {
+  .hero-stats-strip { grid-template-columns: 1fr; gap: 0; padding-top: 1.5rem; }
+  .hero-stat-item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-stat-item:last-child { border-bottom: none; }
+  .hero-stat-item strong { font-size: 2rem; }
+}
+
+/* ======================================================
+   SECTION HEADERS
+====================================================== */
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.section-head h2 { font-size: var(--display-l); }
+.section-head h2 .italic { font-style: italic; font-weight: 200; color: var(--green-mid); }
+.section-head .eyebrow { margin-bottom: 1.25rem; }
+.section-head-actions { text-align: right; }
+.section-head-meta { color: var(--text-muted); max-width: 38ch; justify-self: end; line-height: 1.6; font-size: 0.95rem; }
+@media (max-width: 800px) {
+  .section-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
+  .section-head-actions, .section-head-meta { text-align: left; justify-self: start; }
+}
+
+/* ======================================================
+   FEATURED SINGLE (HOME)
+====================================================== */
+.featured {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.featured-single {
+  width: 100%;
+}
+.featured-card-hero {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--cream-dark);
+  aspect-ratio: 16/9;
+}
+.featured-card-hero .featured-img {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.featured-card-hero .featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transition: transform 1.4s var(--ease);
+}
+.featured-card-hero:hover .featured-img img { transform: scale(1.05); }
+.featured-card-hero .featured-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,0.75) 100%);
+  color: var(--cream);
+  z-index: 2;
+}
+.featured-card-hero .featured-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-soft);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.featured-card-hero .featured-title {
+  font-size: clamp(1.6rem, 3vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+  color: var(--cream);
+}
+.featured-card-hero .featured-meta {
+  font-size: 0.95rem;
+  color: rgba(244, 237, 224, 0.8);
+  max-width: 50ch;
+}
+.featured-card-hero .featured-arrow {
+  position: absolute;
+  top: clamp(1.25rem, 2vw, 2rem);
+  right: clamp(1.25rem, 2vw, 2rem);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+  z-index: 3;
+  font-size: 1.2rem;
+  transition: transform 0.5s var(--ease), background 0.3s ease;
+}
+.featured-card-hero:hover .featured-arrow {
+  transform: rotate(-45deg) scale(1.1);
+  background: var(--cream);
+  color: var(--green-deep);
+}
+@media (max-width: 700px) {
+  .featured-card-hero { aspect-ratio: 4/5; }
+}
+
+/* ======================================================
+   PHILOSOPHY DARK SECTION
+====================================================== */
+.philosophy {
+  position: relative;
+  padding: var(--section-y) 0;
+  background: var(--bg-tint-strong);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+.philosophy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.25) 0%, transparent 50%);
+  pointer-events: none;
+}
+.philosophy-inner {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+.philosophy h2 {
+  color: var(--green-deep);
+  font-size: var(--display-l);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+.philosophy h2 .italic {
+  display: block;
+  font-style: italic;
+  font-weight: 200;
+  color: var(--green-primary);
+}
+.philosophy p {
+  max-width: 60ch;
+  margin: 0 auto;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.philosophy .eyebrow { color: var(--green-deep); }
+.philosophy .eyebrow::before { background: var(--green-deep); }
+
+/* ======================================================
+   PROCESS
+====================================================== */
+.process {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.process-step {
+  position: relative;
+  padding: 2.5rem 2rem 2.25rem;
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.5s var(--ease), border-color 0.4s ease, background 0.4s ease;
+}
+.process-step:hover { transform: translateY(-6px); border-color: var(--green-accent); background: #fff; }
+.process-step .step-num-bg {
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+  font-size: 11rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: rgba(61, 111, 36, 0.06);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+.process-step .step-num {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  background: var(--green-deep);
+  color: var(--cream);
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.process-step h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+.process-step p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+.process-cta {
+  text-align: center;
+  margin-top: 3.5rem;
+}
+@media (max-width: 800px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
+
+/* ======================================================
+   PORTFOLIO PAGE
+====================================================== */
+/* ======================================================
+   PAGE HERO (subpages — typographic, no image)
+====================================================== */
+.page-hero {
+  position: relative;
+  background: var(--cream);
+  color: var(--text-dark);
+  padding: calc(var(--nav-h) + clamp(4rem, 8vw, 7rem)) 0 clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  min-height: 56vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.page-hero-bg-mark {
+  position: absolute;
+  bottom: -2.5rem;
+  right: -1.5rem;
+  font-size: clamp(12rem, 28vw, 28rem);
+  font-weight: 900;
+  color: rgba(61, 111, 36, 0.08);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  font-style: italic;
+}
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.page-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+}
+.page-hero-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.page-hero-main {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+.page-hero h1 {
+  font-size: clamp(3rem, 8.5vw, 8.5rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  color: var(--text-dark);
+  margin: 0;
+}
+.page-hero h1 .italic {
+  display: block;
+  font-style: italic;
+  font-weight: 200;
+  color: var(--green-mid);
+  letter-spacing: -0.035em;
+}
+.page-hero-aside {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1px solid var(--line-strong);
+  padding-bottom: 0.5rem;
+}
+.page-hero-aside p {
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 38ch;
+  margin: 0;
+}
+.page-hero .eyebrow { color: var(--green-mid); }
+.page-hero .eyebrow::before { background: var(--green-mid); }
+
+@media (max-width: 800px) {
+  .page-hero { min-height: auto; }
+  .page-hero-main { grid-template-columns: 1fr; gap: 2rem; }
+  .page-hero-aside { padding-left: 0; border-left: none; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .page-hero-bg-mark { font-size: 14rem; bottom: -2rem; right: -2rem; }
+}
+
+.portfolio-section {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.portfolio-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.5rem;
+  margin-bottom: 3rem;
+}
+.portfolio-filter {
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  transition: all 0.3s var(--ease);
+}
+.portfolio-filter:hover { color: var(--text-dark); }
+.portfolio-filter.active {
+  background: var(--green-deep);
+  color: var(--cream);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 2rem;
+}
+.portfolio-item {
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.portfolio-item.hidden { display: none; }
+.portfolio-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--bg-tint);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+.portfolio-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease), filter 0.5s ease;
+}
+/* For portrait photos — show whole image */
+.portfolio-item.tall .portfolio-img { aspect-ratio: 3/4; }
+.portfolio-item.contain .portfolio-img img { object-fit: contain; }
+.portfolio-item:hover .portfolio-img img { transform: scale(1.07); }
+
+/* BEFORE/AFTER COMPARISON SLIDER — auto-animates + follows mouse on hover */
+.portfolio-item.baswap .portfolio-img { position: relative; overflow: hidden; }
+.portfolio-item.baswap:hover .portfolio-img img { transform: none; }
+.portfolio-item.baswap .ba-after,
+.portfolio-item.baswap .ba-before {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portfolio-item.baswap .ba-after { z-index: 1; }
+.portfolio-item.baswap .ba-before {
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+  animation: baCycle 6s ease-in-out infinite;
+  will-change: clip-path;
+}
+.portfolio-item.baswap .ba-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  animation: baDividerCycle 6s ease-in-out infinite;
+  will-change: left;
+}
+.portfolio-item.baswap .ba-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  pointer-events: none;
+  color: var(--green-deep);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+.portfolio-item.baswap .ba-handle::before {
+  content: '⇄';
+  font-size: 1.1rem;
+}
+.portfolio-item.baswap .ba-divider .ba-handle {
+  left: 50%;
+  top: 50%;
+}
+@keyframes baCycle {
+  0%   { clip-path: inset(0 88% 0 0); }
+  50%  { clip-path: inset(0 12% 0 0); }
+  100% { clip-path: inset(0 88% 0 0); }
+}
+@keyframes baDividerCycle {
+  0%   { left: 12%; }
+  50%  { left: 88%; }
+  100% { left: 12%; }
+}
+
+/* Labels — always visible on respective sides */
+.portfolio-item.baswap .ba-label {
+  position: absolute;
+  top: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.portfolio-item.baswap .ba-label-before {
+  left: 0.85rem;
+  background: var(--green-deep);
+  color: var(--cream);
+}
+.portfolio-item.baswap .ba-label-after {
+  right: 0.85rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--green-deep);
+}
+.portfolio-item.baswap .ba-label::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+/* Pause animation when user hovers — JS will set inline styles instead */
+.portfolio-item.baswap.is-interactive .ba-before,
+.portfolio-item.baswap.is-interactive .ba-divider {
+  animation: none;
+}
+
+/* Hide the zoom overlay on slider cards — slider is the experience */
+.portfolio-item.baswap .portfolio-img-overlay { display: none; }
+.portfolio-item.baswap { cursor: default; }
+.portfolio-item.baswap .portfolio-img { cursor: ew-resize; }
+
+/* SLIDESHOW (.baslide) — auto crossfade between 2 photos for multi-angle projects */
+.portfolio-item.baslide .portfolio-img { position: relative; overflow: hidden; }
+.portfolio-item.baslide:hover .portfolio-img img { transform: none; }
+.portfolio-item.baslide .bs-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: opacity, transform;
+}
+.portfolio-item.baslide .bs-img-1 { animation: bsImg1 8s ease-in-out infinite; }
+.portfolio-item.baslide .bs-img-2 { animation: bsImg2 8s ease-in-out infinite; }
+@keyframes bsImg1 {
+  0%, 42% { opacity: 1; transform: translateX(0) scale(1); }
+  50%, 92% { opacity: 0; transform: translateX(-3%) scale(1.02); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes bsImg2 {
+  0%, 42% { opacity: 0; transform: translateX(3%) scale(1.02); }
+  50%, 92% { opacity: 1; transform: translateX(0) scale(1); }
+  100% { opacity: 0; transform: translateX(3%) scale(1.02); }
+}
+/* Slide indicator dots */
+.bs-dots {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  z-index: 3;
+}
+.bs-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  will-change: background, transform;
+}
+.bs-dot-1 { animation: bsDot1 8s ease-in-out infinite; }
+.bs-dot-2 { animation: bsDot2 8s ease-in-out infinite; }
+@keyframes bsDot1 {
+  0%, 42% { background: white; transform: scale(1.4); }
+  50%, 92% { background: rgba(255, 255, 255, 0.55); transform: scale(1); }
+  100% { background: white; transform: scale(1.4); }
+}
+@keyframes bsDot2 {
+  0%, 42% { background: rgba(255, 255, 255, 0.55); transform: scale(1); }
+  50%, 92% { background: white; transform: scale(1.4); }
+  100% { background: rgba(255, 255, 255, 0.55); transform: scale(1); }
+}
+.portfolio-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(61, 111, 36, 0.6));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: grid;
+  place-items: end;
+  padding: 1.25rem;
+  z-index: 1;
+}
+.portfolio-item:hover .portfolio-img-overlay { opacity: 1; }
+.portfolio-zoom {
+  width: 44px; height: 44px;
+  background: var(--cream);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--green-deep);
+  transform: translateY(10px);
+  transition: transform 0.5s var(--ease);
+}
+.portfolio-item:hover .portfolio-zoom { transform: translateY(0); }
+.portfolio-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.portfolio-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 700px) {
+  .portfolio-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* Before/After section in portfolio */
+.beforeafter-section {
+  padding: var(--section-y) 0;
+  background: var(--cream-dark);
+}
+.beforeafter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.beforeafter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ba-slider {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: ew-resize;
+  user-select: none;
+  background: #000;
+}
+.ba-slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.ba-slider .ba-after { clip-path: inset(0 0 0 50%); }
+.ba-slider .ba-handle {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--cream);
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+}
+.ba-slider .ba-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--green-deep);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.ba-slider .ba-handle::before {
+  content: '⇄';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  color: var(--green-deep);
+  z-index: 1;
+  font-weight: 700;
+}
+.ba-label {
+  position: absolute;
+  top: 1rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--cream);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 100px;
+  z-index: 6;
+}
+.ba-label.before { left: 1rem; }
+.ba-label.after { right: 1rem; }
+.ba-info { padding: 0.25rem 0; }
+.ba-info-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.ba-info-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+@media (max-width: 800px) {
+  .beforeafter-grid { grid-template-columns: 1fr; }
+}
+
+/* ======================================================
+   SERVICES — categories + sub-services
+====================================================== */
+.services-section {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.service-category {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+.service-category + .service-category {
+  border-top: 1px solid var(--line);
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+.category-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+.category-showcase {
+  position: relative;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: var(--bg-tint);
+}
+.category-showcase img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  display: block;
+  transition: transform 1.6s var(--ease);
+}
+.category-showcase:hover img { transform: scale(1.04); }
+/* For portrait/tall photos in showcase — show whole image with letterboxing */
+.category-showcase.contain img { object-fit: contain; }
+.category-showcase-label {
+  position: absolute;
+  bottom: clamp(1rem, 2vw, 1.75rem);
+  left: clamp(1rem, 2vw, 1.75rem);
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+@media (max-width: 700px) {
+  .category-showcase { aspect-ratio: 16/9; }
+}
+.category-num {
+  font-size: clamp(4.5rem, 9vw, 8rem);
+  font-weight: 900;
+  color: var(--green-primary);
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  font-style: italic;
+  display: block;
+}
+.category-meta h2 {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+  color: var(--green-deep);
+}
+.category-lead {
+  color: var(--text-muted);
+  max-width: 70ch;
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.65;
+  margin: 0;
+}
+.subservices-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.subservice-card {
+  position: relative;
+  padding: clamp(1.75rem, 2.5vw, 2.25rem) clamp(1.5rem, 2vw, 2rem);
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.4s ease, transform 0.5s var(--ease), background 0.4s ease, box-shadow 0.4s var(--ease);
+}
+.subservice-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-accent);
+  background: #fff;
+  box-shadow: var(--shadow-card);
+}
+.subservice-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 3px;
+  background: var(--green-primary);
+  transition: width 0.5s var(--ease);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.subservice-card:hover::before { width: 100%; }
+.subservice-card h3 {
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.6rem;
+  color: var(--green-deep);
+}
+.subservice-card > p {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.service-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+  list-style: none;
+}
+.service-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  line-height: 1.45;
+}
+.service-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--green-primary);
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .category-header { grid-template-columns: 1fr; gap: 0.5rem; }
+  .category-num { font-size: clamp(3.5rem, 14vw, 5rem); }
+  .subservices-grid { grid-template-columns: 1fr; }
+}
+
+/* TECHNIKA */
+.technika-section {
+  padding: var(--section-y) 0;
+  background: var(--cream-dark);
+}
+.technika-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+.technika-item .technika-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  background: var(--bg-tint);
+}
+.technika-img img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  transition: transform 1s var(--ease);
+}
+.technika-item:hover .technika-img img { transform: scale(1.04); }
+.technika-name { font-size: 0.92rem; font-weight: 600; }
+@media (max-width: 800px) { .technika-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* CTA banner */
+.cta-banner {
+  position: relative;
+  padding: clamp(3rem, 6vw, 5rem);
+  background: var(--bg-tint-strong);
+  color: var(--text-dark);
+  border-radius: var(--radius);
+  text-align: center;
+  overflow: hidden;
+  margin: var(--section-y) auto;
+  border: 1px solid var(--line);
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.5), transparent 60%);
+  pointer-events: none;
+}
+.cta-banner h2 {
+  position: relative;
+  color: var(--green-deep);
+  font-size: var(--display-m);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.cta-banner h2 .italic { font-style: italic; font-weight: 200; color: var(--green-primary); }
+.cta-banner p {
+  position: relative;
+  color: var(--text-muted);
+  max-width: 50ch;
+  margin: 0 auto 2rem;
+}
+.cta-banner .btn-primary {
+  position: relative;
+  background: var(--green-deep);
+  color: var(--cream);
+}
+.cta-banner .btn-primary:hover {
+  background: var(--green-primary);
+  color: var(--cream);
+}
+
+/* ======================================================
+   BLOG
+====================================================== */
+.blog-section {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.blog-featured {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid var(--line);
+}
+.blog-featured .blog-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--cream-dark);
+}
+.blog-featured .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.blog-featured:hover .blog-img img { transform: scale(1.04); }
+.blog-featured-content { display: flex; flex-direction: column; justify-content: center; }
+.blog-featured h2 {
+  font-size: var(--display-m);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 1rem 0 1.25rem;
+}
+.blog-featured p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+.blog-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.blog-meta span:first-child { color: var(--green-mid); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.blog-card {
+  cursor: pointer;
+  transition: transform 0.5s var(--ease);
+}
+.blog-card:hover { transform: translateY(-6px); }
+.blog-card .blog-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--cream-dark);
+  margin-bottom: 1.25rem;
+}
+.blog-card .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.blog-card:hover .blog-img img { transform: scale(1.07); }
+.blog-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0.85rem 0 0.5rem;
+  line-height: 1.2;
+}
+.blog-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .blog-featured { grid-template-columns: 1fr; gap: 1.5rem; }
+  .blog-grid { grid-template-columns: 1fr; }
+}
+
+/* Blog Detail */
+.blog-detail {
+  padding: calc(var(--nav-h) + 4rem) 0 var(--section-y);
+  background: var(--cream);
+}
+.blog-detail-header {
+  max-width: 780px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.blog-detail-header .eyebrow { justify-content: center; }
+.blog-detail h1 {
+  font-size: var(--display-m);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin: 1.5rem 0;
+}
+.blog-detail-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.blog-detail-hero {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.blog-detail-hero img { width: 100%; height: 100%; object-fit: cover; }
+.blog-content {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+}
+.blog-content h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 3rem 0 1rem;
+}
+.blog-content h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+}
+.blog-content p { margin-bottom: 1.25rem; color: var(--text-dark); }
+.blog-content p strong { color: var(--green-deep); font-weight: 700; }
+.blog-content ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  list-style: none;
+}
+.blog-content ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.blog-content ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--green-mid);
+  font-weight: 700;
+}
+.blog-content blockquote {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: var(--cream-light);
+  border-left: 3px solid var(--green-deep);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--green-deep);
+}
+.blog-back {
+  max-width: 720px;
+  margin: 4rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ======================================================
+   KONTAKT
+====================================================== */
+.kontakt-section {
+  padding: var(--section-y) 0;
+  background: var(--cream);
+}
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.kontakt-info h2 {
+  font-size: var(--display-m);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 1.5rem 0 2rem;
+}
+.kontakt-info h2 .italic { font-style: italic; font-weight: 200; color: var(--green-mid); display: block; }
+.kontakt-info > p { color: var(--text-muted); max-width: 50ch; line-height: 1.65; margin-bottom: 3rem; }
+.kontakt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.kontakt-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+.kontakt-item-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--cream-dark);
+  display: grid;
+  place-items: center;
+  color: var(--green-deep);
+}
+.kontakt-item-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.kontakt-item-value { font-size: 1.05rem; font-weight: 600; }
+.kontakt-item-value a { transition: color 0.3s ease; }
+.kontakt-item-value a:hover { color: var(--green-mid); }
+.kontakt-item-value-sub { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); margin-top: 0.2rem; }
+
+.kontakt-form {
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+}
+.kontakt-form h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.kontakt-form > p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-field { margin-bottom: 1.25rem; }
+.form-field label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.form-field input, .form-field textarea {
+  width: 100%;
+  padding: 0.85rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.form-field input:focus, .form-field textarea:focus { border-color: var(--green-deep); }
+.form-field textarea { min-height: 120px; resize: vertical; }
+.kontakt-form .btn-primary { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+@media (max-width: 900px) {
+  .kontakt-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer {
+  background: var(--bg-tint);
+  color: var(--text-dark);
+  padding: 5rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 0%, rgba(255, 255, 255, 0.5), transparent 60%);
+  pointer-events: none;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr;
+  gap: 3rem;
+  position: relative;
+  margin-bottom: 4rem;
+}
+.footer .logo { color: var(--text-dark); margin-bottom: 1.25rem; }
+.footer .logo-mark { background: var(--green-deep); color: var(--cream); }
+.footer-tagline { color: var(--text-muted); max-width: 38ch; line-height: 1.6; font-size: 0.93rem; }
+.footer-col h4 {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 0.75rem; }
+.footer-col li a {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
+}
+.footer-col li a:hover { color: var(--green-primary); }
+.footer-contact-line { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-dark); }
+.footer-contact-line a { transition: color 0.3s ease; }
+.footer-contact-line a:hover { color: var(--green-primary); }
+.footer-contact-line strong { color: var(--green-deep); font-weight: 700; }
+.footer-contact-meta { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+.footer-bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.whatsapp-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 90;
+  background: #25d366;
+  color: white;
+  padding: 0.85rem 1.4rem;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.whatsapp-fab:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5); }
+
+@media (max-width: 800px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+/* ======================================================
+   LIGHTBOX
+====================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(28, 38, 22, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.lightbox.open { display: flex; opacity: 1; }
+.lightbox-img-wrap {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: grid;
+  place-items: center;
+}
+.lightbox-img-wrap img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  animation: zoomIn 0.5s var(--ease);
+}
+@keyframes zoomIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.lightbox-close {
+  position: absolute;
+  top: 2rem; right: 2rem;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  font-size: 1.2rem;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
+.lightbox-caption {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: rgba(0,0,0,0.4);
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  backdrop-filter: blur(10px);
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+.lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+.lightbox-prev { left: 2rem; }
+.lightbox-next { right: 2rem; }
+.lightbox-counter {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.8);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 5;
+}
+@media (max-width: 700px) {
+  .lightbox-prev { left: 0.75rem; }
+  .lightbox-next { right: 0.75rem; }
+  .lightbox-nav { width: 44px; height: 44px; }
+  .lightbox-counter { top: 1rem; font-size: 0.75rem; }
+}
+
+/* Portfolio gallery count badge */
+.portfolio-gallery-count {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.portfolio-gallery-count::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-primary);
+}
+
+/* ======================================================
+   SCROLL REVEAL — only active when JS adds .js-reveal class to body
+   This way content is ALWAYS visible if JS fails or IO doesn't fire
+====================================================== */
+body.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+body.js-reveal .reveal.in { opacity: 1; transform: translateY(0); }
+body.js-reveal .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+body.js-reveal .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+body.js-reveal .reveal-stagger.in > *:nth-child(1) { transition-delay: 0s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(2) { transition-delay: 0.08s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(3) { transition-delay: 0.16s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(4) { transition-delay: 0.24s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(5) { transition-delay: 0.32s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(6) { transition-delay: 0.4s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(7) { transition-delay: 0.48s; }
+body.js-reveal .reveal-stagger.in > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* ======================================================
+   UTILITIES
+====================================================== */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 2rem; }
+
+/* ======================================================
+   ACCESSIBILITY & PRINT
+====================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-media img { animation: none; }
+}
+:focus-visible {
+  outline: 2px solid var(--green-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-outline" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="logo" data-page="home" href="#home">
+      <span class="logo-mark">M</span>
+      <span><b>MT</b>garden</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" data-page="home" href="#home">Domů</a>
+      <a class="nav-link" data-page="portfolio" href="#portfolio">Portfolio</a>
+      <a class="nav-link" data-page="sluzby" href="#sluzby">Služby</a>
+      <a class="nav-link" data-page="blog" href="#blog">Blog</a>
+      <a class="nav-link" data-page="kontakt" href="#kontakt">Kontakt</a>
+      <a class="btn btn-primary" data-page="kontakt" href="#kontakt">Konzultace zdarma</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============== HOME PAGE ============== -->
+<section class="page" id="page-home" data-page-id="home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <span class="eyebrow">Zahradní architektura · Praha &amp; Středočeský kraj</span>
+          <h1 class="hero-title">Zahrady, <span class="italic">které žijí.</span></h1>
+          <p class="hero-lead">Projektujeme a realizujeme zahrady s citem pro přírodu. Každý projekt je jedinečná kompozice — návrh, realizace i dlouhodobá péče.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-page="portfolio" href="#portfolio">Naše realizace <span class="arrow">→</span></a>
+            <a class="btn btn-secondary" data-page="kontakt" href="#kontakt">Konzultace zdarma</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <figure class="hero-photo">
+            <img src="images/portfolio-zahrada-prirodni.jpg" alt="Realizace zahrady — mulčový záhon a okrasná výsadba">
+            <figcaption class="hero-photo-meta">
+              <span class="hero-photo-label">Realizace 2025</span>
+              <span class="hero-photo-place">Středočeský kraj</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="hero-stats-strip">
+        <div class="hero-stat-item">
+          <strong data-count="150">0</strong>
+          <span>realizací</span>
+        </div>
+        <div class="hero-stat-item">
+          <strong data-count="12">0</strong>
+          <span>let zkušeností</span>
+        </div>
+        <div class="hero-stat-item">
+          <strong data-count="100">0</strong>
+          <span>% spokojených klientů</span>
+        </div>
+      </div>
+    </div>
+    <span class="hero-decor-num">01</span>
+  </div>
+
+  <!-- FEATURED PORTFOLIO -->
+  <section class="featured">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="mt-2">Vybrané <span class="italic h-italic-thin">realizace</span></h2>
+        </div>
+        <div class="section-head-actions">
+          <a class="btn-ghost" data-page="portfolio" href="#portfolio">Zobrazit celé portfolio →</a>
+        </div>
+      </div>
+
+      <div class="featured-single reveal">
+        <article class="featured-card-hero" data-lightbox="hero-bazenova-zona.jpg" data-caption="Bazénová relaxační zóna">
+          <div class="featured-img"><img src="images/hero-bazenova-zona.jpg" alt="Bazénová relaxační zóna"></div>
+          <div class="featured-overlay">
+            <span class="featured-tag">Kompletní realizace</span>
+            <h3 class="featured-title">Bazénová relaxační zóna</h3>
+            <p class="featured-meta">Návrh, výsadba a štěrkové záhony okolo bazénu</p>
+          </div>
+          <div class="featured-arrow">↗</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy">
+    <div class="container philosophy-inner reveal">
+      <span class="eyebrow center">Filozofie</span>
+      <h2 class="mt-2">Zahrada není jen trávník.<span class="italic">Je to architektura přírody.</span></h2>
+      <p class="mt-2">Každý projekt začínáme pečlivou analýzou prostoru. Navrhujeme zahrady, kde se geometrická přesnost potkává s organickou krásou přírody.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Jak pracujeme</span>
+          <h2 class="mt-2">Náš <span class="italic h-italic-thin">proces</span></h2>
+        </div>
+        <p class="section-head-meta">Od první konzultace přes precizní návrh až po realizaci a dlouhodobou péči — vedeme vás každým krokem.</p>
+      </div>
+      <div class="process-grid reveal-stagger">
+        <div class="process-step">
+          <span class="step-num-bg">01</span>
+          <span class="step-num">01 — Návrh</span>
+          <h3>Návrh</h3>
+          <p>Pečlivá analýza prostoru, půdy a vašich představ. Návrh zahrady přesně na míru s ohledem na světelné podmínky a požadovanou údržbu.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num-bg">02</span>
+          <span class="step-num">02 — Realizace</span>
+          <h3>Realizace</h3>
+          <p>Precizní provedení s důrazem na detail. Kvalitní materiály, odborná výsadba a vlastní strojový park bez externích dodavatelů.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num-bg">03</span>
+          <span class="step-num">03 — Péče</span>
+          <h3>Péče</h3>
+          <p>Dlouhodobá sezónní údržba. Poradenství a podpora pro zdravou zahradu po celý rok — od jarních příprav po zimní řez.</p>
+        </div>
+      </div>
+      <div class="process-cta">
+        <a class="btn btn-primary" data-page="kontakt" href="#kontakt">Začněme spolu <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============== PORTFOLIO PAGE ============== -->
+<section class="page" id="page-portfolio" data-page-id="portfolio">
+  <div class="page-hero">
+    <div class="container page-hero-content">
+      <div class="page-hero-top">
+        <span class="eyebrow">Portfolio</span>
+        <span class="page-hero-meta">17 projektů · 2023—2026</span>
+      </div>
+      <div class="page-hero-main">
+        <h1>Naše <span class="italic">realizace</span></h1>
+        <div class="page-hero-aside">
+          <p>Každý projekt je unikátní kompozice navržená na míru danému prostoru a majiteli. Listujte galerií a najděte inspiraci pro svou zahradu.</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-hero-bg-mark">02</span>
+  </div>
+
+  <section class="portfolio-section">
+    <div class="container">
+      <div class="portfolio-filters reveal">
+        <button class="portfolio-filter active" data-filter="all">Vše</button>
+        <button class="portfolio-filter" data-filter="vysadba">Výsadba</button>
+        <button class="portfolio-filter" data-filter="design">Design</button>
+        <button class="portfolio-filter" data-filter="kaceni">Kácení</button>
+        <button class="portfolio-filter" data-filter="udrzba">Údržba</button>
+        <button class="portfolio-filter" data-filter="zemni">Zemní práce</button>
+        <button class="portfolio-filter" data-filter="firemni">Firemní areály</button>
+      </div>
+
+      <div class="portfolio-grid reveal-stagger" id="portfolioGrid">
+
+        <article class="portfolio-item baswap" data-cat="vysadba" data-gallery="bazenova-zona">
+          <div class="portfolio-img">
+            <img class="ba-after" src="images/portfolio-bazen-stetkove-zahony.jpg" alt="Detail štěrkového záhonu">
+            <img class="ba-before" src="images/hero-bazenova-zona.jpg" alt="Bazén — celkový pohled" style="object-position: center 70%">
+            <div class="ba-divider"><div class="ba-handle"></div></div>
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Výsadba</span><span>2024</span></div>
+          <h3 class="portfolio-title">Bazénová relaxační zóna</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="vysadba" data-gallery="prirodni-zahrada">
+          <div class="portfolio-img">
+            <img src="images/portfolio-zahrada-prirodni.jpg" alt="Přírodní zahrada s mulčovým záhonem">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Výsadba</span><span>2025</span></div>
+          <h3 class="portfolio-title">Přírodní zahrada s mulčovým záhonem</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="vysadba" data-gallery="mulcovy-zahon">
+          <div class="portfolio-img">
+            <img src="images/portfolio-mulcovy-zahon-novy.jpg" alt="Mulčový záhon s rozkvětem — oválný design">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Výsadba</span><span>2025</span></div>
+          <h3 class="portfolio-title">Mulčový záhon s rozkvětem</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="design" data-gallery="sterkova-cestka">
+          <div class="portfolio-img">
+            <img src="images/portfolio-sterkova-jehlicnany.jpg" alt="Štěrková plocha s jehličnany — celkový pohled">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Design</span><span>2025</span></div>
+          <h3 class="portfolio-title">Štěrková plocha s jehličnany</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="design" data-gallery="zahon-u-schodu">
+          <div class="portfolio-img">
+            <img src="images/portfolio-zahon-u-schodu-novy.jpg" alt="Záhon u schodů s ozdobnými keři">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Design</span><span>2025</span></div>
+          <h3 class="portfolio-title">Záhon u schodů s ozdobnými keři</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="design" data-gallery="okrasny-sterk">
+          <div class="portfolio-img">
+            <img src="images/portfolio-sterkovy-zahon-2.jpg" alt="Okrasný štěrkový záhon s jehličnany a smuteční modřínem">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Design</span><span>2025</span></div>
+          <h3 class="portfolio-title">Okrasný štěrkový záhon</h3>
+        </article>
+
+        <article class="portfolio-item baswap" data-cat="kaceni" data-gallery="kaceni-jasanu">
+          <div class="portfolio-img">
+            <img class="ba-after" src="images/portfolio-jasan-pri-praci.jpg" alt="Při kácení jasanu">
+            <img class="ba-before" src="images/portfolio-jasan-pred.jpg" alt="Před zásahem — jasan u zdi">
+            <div class="ba-divider"><div class="ba-handle"></div></div>
+            <span class="ba-label ba-label-before">Před</span>
+            <span class="ba-label ba-label-after">Při kácení</span>
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Kácení</span><span>2025</span></div>
+          <h3 class="portfolio-title">Rizikové kácení jasanu u zdi</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="kaceni" data-gallery="kaceni-lipy-plosina">
+          <div class="portfolio-img">
+            <img src="images/portfolio-kaceni-plosina-akce.jpg" alt="Kácení vzrostlé lípy z plošiny">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Kácení</span><span>2025</span></div>
+          <h3 class="portfolio-title">Kácení vzrostlé lípy z plošiny</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="kaceni" data-gallery="plosina-akce-jasan">
+          <div class="portfolio-img">
+            <img src="images/portfolio-strom-stena.jpg" alt="Plošina v akci u zdi — práce na koruně stromu">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Kácení</span><span>2025</span></div>
+          <h3 class="portfolio-title">Plošina v akci u zdi</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="kaceni" data-gallery="uklid-po-kaceni">
+          <div class="portfolio-img">
+            <img src="images/portfolio-jasan-vybaveni.jpg" alt="Úklid po kácení — VW Transporter naložený větvemi a Boels plošina">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Kácení</span><span>2025</span></div>
+          <h3 class="portfolio-title">Úklid a odvoz po kácení</h3>
+        </article>
+
+
+        <article class="portfolio-item" data-cat="kaceni" data-gallery="zimni-cisteni">
+          <div class="portfolio-img">
+            <img src="images/portfolio-zimni-cisteni.jpg" alt="Zimní vyčištění porostu">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Kácení</span><span>2025</span></div>
+          <h3 class="portfolio-title">Zimní vyčištění porostu</h3>
+        </article>
+
+        <article class="portfolio-item baswap" data-cat="udrzba" data-gallery="secani-trav">
+          <div class="portfolio-img">
+            <img class="ba-after" src="images/portfolio-secani-trav-po.jpg" alt="Po sečení trávy">
+            <img class="ba-before" src="images/portfolio-secani-trav-pred.jpg" alt="Před sečením — zarostlá plocha">
+            <div class="ba-divider"><div class="ba-handle"></div></div>
+            <span class="ba-label ba-label-before">Před</span>
+            <span class="ba-label ba-label-after">Po</span>
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Údržba</span><span>2025</span></div>
+          <h3 class="portfolio-title">Sečení a údržba trávní plochy</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="udrzba" data-gallery="udrzba-zahrady">
+          <div class="portfolio-img">
+            <img src="images/portfolio-udrzba-zivy-plot.jpg" alt="Stříhání živých plotů — tvarované topiary">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Údržba</span><span>2025</span></div>
+          <h3 class="portfolio-title">Stříhání živých plotů</h3>
+        </article>
+
+        <article class="portfolio-item contain" data-cat="zemni" data-gallery="vykopove-prace">
+          <div class="portfolio-img">
+            <img src="images/portfolio-vykop-bagr.jpg" alt="Výkopové práce — JCB při kopání rýhy">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Zemní práce</span><span>2025</span></div>
+          <h3 class="portfolio-title">Výkopové práce u rodinného domu</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="zemni" data-gallery="doprava-techniky">
+          <div class="portfolio-img">
+            <img src="images/technika-bagr-prepravnik.jpg" alt="Doprava techniky">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Zemní práce</span><span>2025</span></div>
+          <h3 class="portfolio-title">Doprava techniky na realizaci</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="firemni" data-gallery="linie-haly">
+          <div class="portfolio-img">
+            <img src="images/portfolio-firemni-areal-vysadba.jpg" alt="Liniová výsadba podél haly">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Firemní areál</span><span>2025</span></div>
+          <h3 class="portfolio-title">Liniová výsadba podél haly</h3>
+        </article>
+
+        <article class="portfolio-item" data-cat="firemni" data-gallery="pole-uprava">
+          <div class="portfolio-img">
+            <img src="images/portfolio-pole-uprava.jpg" alt="Úprava liniové výsadby u pole">
+            <div class="portfolio-img-overlay"><div class="portfolio-zoom">+</div></div>
+          </div>
+          <div class="portfolio-meta"><span>Firemní areál</span><span>2025</span></div>
+          <h3 class="portfolio-title">Úprava liniové výsadby u pole</h3>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+</section>
+
+<!-- ============== SLUZBY PAGE ============== -->
+<section class="page" id="page-sluzby" data-page-id="sluzby">
+  <div class="page-hero">
+    <div class="container page-hero-content">
+      <div class="page-hero-top">
+        <span class="eyebrow">Služby</span>
+        <span class="page-hero-meta">04 oblasti · 11 specializací</span>
+      </div>
+      <div class="page-hero-main">
+        <h1>Co pro vás <span class="italic">vytvoříme</span></h1>
+        <div class="page-hero-aside">
+          <p>Komplexní služby zahradní architektury — od prvotního návrhu přes výsadbu a kácení až po dlouhodobou péči o vaši zahradu.</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-hero-bg-mark">03</span>
+  </div>
+
+  <section class="services-section">
+    <div class="container">
+
+      <!-- ════════ CATEGORY 01 ════════ -->
+      <div class="service-category reveal">
+        <div class="category-header">
+          <span class="category-num">01</span>
+          <div class="category-meta">
+            <h2>Zahrady a realizace</h2>
+            <p class="category-lead">Navrhujeme a realizujeme zahrady na míru — od nových realizací až po úpravy, doplnění a dlouhodobou péči o venkovní prostory.</p>
+          </div>
+        </div>
+        <div class="category-showcase">
+          <img src="images/portfolio-zahrada-prirodni.jpg" alt="Realizace zahrady — mulčový záhon a okrasná výsadba">
+          <span class="category-showcase-label">Realizace 2025</span>
+        </div>
+        <div class="subservices-grid reveal-stagger">
+
+          <article class="subservice-card">
+            <h3>Návrh zahrady</h3>
+            <p>Praktický návrh zahrady podle prostoru, terénu a způsobu využití. Funkční řešení, které dává smysl dlouhodobě i při následné údržbě.</p>
+            <ul class="service-list">
+              <li>Rozvržení prostoru</li>
+              <li>Návrh výsadby</li>
+              <li>Funkční řešení</li>
+              <li>Inspirace a konzultace</li>
+              <li>Moderní i přírodní styl</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Realizace zahrady</h3>
+            <p>Kompletní realizace zahrady od přípravy terénu až po finální úpravy a výsadbu.</p>
+            <ul class="service-list">
+              <li>Trávníky</li>
+              <li>Výsadba stromů</li>
+              <li>Modelace terénu</li>
+              <li>Závlahové systémy</li>
+              <li>Obrubníky a přechody</li>
+              <li>Štěrkové plochy</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Úpravy a doplnění zahrad</h3>
+            <p>Úpravy starších zahrad, doplnění zeleně nebo modernizace nefunkčních částí prostoru.</p>
+            <ul class="service-list">
+              <li>Obnova zahrad</li>
+              <li>Nové záhony</li>
+              <li>Dosadba stromů</li>
+              <li>Přestavba částí zahrady</li>
+              <li>Modernizace prostoru</li>
+              <li>Úprava okolí domu</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Pravidelná údržba</h3>
+            <p>Dlouhodobá péče o zahrady a venkovní prostory během celé sezóny.</p>
+            <ul class="service-list">
+              <li>Sekání trávy</li>
+              <li>Vertikutace</li>
+              <li>Hnojení</li>
+              <li>Ořezy stromů a keřů</li>
+              <li>Sezónní servis</li>
+              <li>Péče o zeleň</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ════════ CATEGORY 02 ════════ -->
+      <div class="service-category reveal">
+        <div class="category-header">
+          <span class="category-num">02</span>
+          <div class="category-meta">
+            <h2>Zemní práce a technika</h2>
+            <p class="category-lead">Zemní a výkopové práce pro zahrady, stavby i větší pozemky. Díky vlastní technice zvládneme i náročnější realizace.</p>
+          </div>
+        </div>
+        <div class="category-showcase contain">
+          <img src="images/portfolio-vykopove-prace.jpg" alt="Výkopové práce u rodinného domu">
+          <span class="category-showcase-label">Výkop · 2025</span>
+        </div>
+        <div class="subservices-grid reveal-stagger">
+
+          <article class="subservice-card">
+            <h3>Výkopové práce</h3>
+            <p>Kompletní výkopové práce pro zahrady, bazény i stavební přípravy.</p>
+            <ul class="service-list">
+              <li>Výkopy bazénů</li>
+              <li>Základy</li>
+              <li>Výkopy sítí</li>
+              <li>Drenáže</li>
+              <li>Příprava pozemků</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Terénní úpravy</h3>
+            <p>Úprava a modelace terénu pro budoucí realizace i finální vzhled pozemku.</p>
+            <ul class="service-list">
+              <li>Srovnání terénu</li>
+              <li>Hutnění</li>
+              <li>Navážka materiálu</li>
+              <li>Modelace pozemků</li>
+              <li>Příprava podkladu</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Technika a manipulace</h3>
+            <p>Práce s technikou pro efektivní realizaci větších i náročnějších zakázek.</p>
+            <ul class="service-list">
+              <li>Nakládka materiálu</li>
+              <li>Odvoz zeminy</li>
+              <li>Převoz materiálu</li>
+              <li>Čištění pozemků</li>
+              <li>Příjezdové cesty</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ════════ CATEGORY 03 ════════ -->
+      <div class="service-category reveal">
+        <div class="category-header">
+          <span class="category-num">03</span>
+          <div class="category-meta">
+            <h2>Kácení a rizikové práce</h2>
+            <p class="category-lead">Bezpečné kácení stromů včetně rizikových prací ve výškách a kompletního vyčištění pozemků.</p>
+          </div>
+        </div>
+        <div class="category-showcase contain">
+          <img src="images/portfolio-lipa-prorez.jpg" alt="Plošina v akci — kácení s odvozem větví">
+          <span class="category-showcase-label">Plošina · Rizikové kácení</span>
+        </div>
+        <div class="subservices-grid reveal-stagger">
+
+          <article class="subservice-card">
+            <h3>Rizikové kácení</h3>
+            <p>Kácení nebezpečných stromů v blízkosti domů, komunikací nebo elektrického vedení.</p>
+            <ul class="service-list">
+              <li>Rizikové kácení</li>
+              <li>Postupné kácení</li>
+              <li>Práce ve výškách</li>
+              <li>Zajištění prostoru</li>
+              <li>Bezpečné odstranění stromů</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Čištění pozemků</h3>
+            <p>Vyčištění zanedbaných nebo zarostlých pozemků před další realizací.</p>
+            <ul class="service-list">
+              <li>Náletové dřeviny</li>
+              <li>Likvidace porostu</li>
+              <li>Štěpkování</li>
+              <li>Odvoz dřeva</li>
+              <li>Příprava pozemku</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ════════ CATEGORY 04 ════════ -->
+      <div class="service-category reveal">
+        <div class="category-header">
+          <span class="category-num">04</span>
+          <div class="category-meta">
+            <h2>Firemní areály a správa pozemků</h2>
+            <p class="category-lead">Pravidelná údržba firemních areálů, větších zahrad a rozlehlých pozemků včetně sezónního servisu.</p>
+          </div>
+        </div>
+        <div class="category-showcase">
+          <img src="images/portfolio-udrzba-zahrady-podzim.jpg" alt="Údržba většího pozemku — stříhání živých plotů">
+          <span class="category-showcase-label">Údržba pozemku · Podzim</span>
+        </div>
+        <div class="subservices-grid reveal-stagger">
+
+          <article class="subservice-card">
+            <h3>Údržba areálů</h3>
+            <p>Kompletní péče o venkovní prostory firem, provozoven a bytových objektů.</p>
+            <ul class="service-list">
+              <li>Sekání velkých ploch</li>
+              <li>Údržba zeleně</li>
+              <li>Ořezy</li>
+              <li>Čistota areálů</li>
+              <li>Sezónní servis</li>
+            </ul>
+          </article>
+
+          <article class="subservice-card">
+            <h3>Správa větších pozemků</h3>
+            <p>Dlouhodobá údržba větších ploch s využitím profesionální techniky.</p>
+            <ul class="service-list">
+              <li>Mulčování</li>
+              <li>Údržba pozemků</li>
+              <li>Čištění ploch</li>
+              <li>Péče o cesty</li>
+              <li>Údržba okolí objektů</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="technika-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Vlastní vybavení</span>
+          <h2 class="mt-2">Naše <span class="italic h-italic-thin">technika</span></h2>
+        </div>
+        <p class="section-head-meta">Disponujeme vlastním strojovým parkem — vše zvládneme bez externích dodavatelů, rychle a spolehlivě.</p>
+      </div>
+      <div class="technika-grid reveal-stagger">
+        <div class="technika-item">
+          <div class="technika-img"><img src="images/technika-bagr-prepravnik.jpg" alt="Doprava — VW Transporter a JCB na přepravníku"></div>
+          <div class="technika-name">Doprava &amp; přeprava</div>
+        </div>
+        <div class="technika-item">
+          <div class="technika-img"><img src="images/technika-plosina.jpg" alt="Plošina Boels"></div>
+          <div class="technika-name">Plošina Boels</div>
+        </div>
+        <div class="technika-item">
+          <div class="technika-img"><img src="images/technika-bagr-jcb.jpg" alt="Bagr JCB 8016 CTS"></div>
+          <div class="technika-name">Bagr JCB 8016</div>
+        </div>
+        <div class="technika-item">
+          <div class="technika-img"><img src="images/technika-traktor-mulcovac.jpg" alt="Traktor Zetor s mulčovačem"></div>
+          <div class="technika-name">Traktor s mulčovačem</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Máte zájem o <span class="italic">konzultaci?</span></h2>
+      <p>Nezávazná konzultace je zdarma. Přijedeme se podívat na váš pozemek.</p>
+      <a class="btn btn-primary" data-page="kontakt" href="#kontakt">Konzultace zdarma <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BLOG PAGE ============== -->
+<section class="page" id="page-blog" data-page-id="blog">
+  <div class="page-hero">
+    <div class="container page-hero-content">
+      <div class="page-hero-top">
+        <span class="eyebrow">Almanach</span>
+        <span class="page-hero-meta">Insights · Aktualizováno 05/2026</span>
+      </div>
+      <div class="page-hero-main">
+        <h1>Zahradní <span class="italic">deník</span></h1>
+        <div class="page-hero-aside">
+          <p>Tipy, postřehy a know-how z praxe. Sezónní rady pro péči o zahradu, výběr rostlin a údržbu trávníku.</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-hero-bg-mark">04</span>
+  </div>
+
+  <section class="blog-section">
+    <div class="container">
+
+      <article class="blog-featured reveal" data-blog="trvanlivy-travnik">
+        <div class="blog-img"><img src="images/portfolio-secani-trav-po.jpg" alt="Trávník"></div>
+        <div class="blog-featured-content">
+          <div class="blog-meta"><span>Údržba</span><span>8 min čtení</span><span>Květen 2026</span></div>
+          <h2>Jak mít trvanlivý trávník i v období sucha</h2>
+          <p>Pravidelná údržba není jen o sečení. Sdílíme s vámi osvědčený plán péče o trávník napříč sezónou — od jarní vertikutace přes letní zálivku až po podzimní hnojení. Vše tak, aby vaše zahrada vypadala dobře i v období extrémního sucha.</p>
+          <a class="btn-ghost" data-blog="trvanlivy-travnik" href="#blog/trvanlivy-travnik">Číst celý článek →</a>
+        </div>
+      </article>
+
+      <div class="blog-grid reveal-stagger">
+
+        <article class="blog-card" data-blog="kdy-kacet-stromy">
+          <div class="blog-img"><img src="images/portfolio-briza-tall.jpg" alt="Strom před kácením"></div>
+          <div class="blog-meta"><span>Kácení</span><span>6 min</span></div>
+          <h3>Kdy je nejlepší doba na kácení stromů?</h3>
+          <p>Vegetační klid od listopadu do března je ideální pro většinu zásahů. Vysvětlujeme, proč zima zjednodušuje práci a co řešit s městským úřadem.</p>
+        </article>
+
+        <article class="blog-card" data-blog="sterkovy-zahon">
+          <div class="blog-img"><img src="images/portfolio-bazen-stetkove-zahony.jpg" alt="Štěrkový záhon"></div>
+          <div class="blog-meta"><span>Design</span><span>7 min</span></div>
+          <h3>Štěrkový záhon krok za krokem</h3>
+          <p>Od přípravy podloží přes geotextilii až po finální výběr okrasného štěrku. Návod, jak založit nízkoúdržbový záhon, který bude krásný roky.</p>
+        </article>
+
+        <article class="blog-card" data-blog="bazenove-okoli">
+          <div class="blog-img"><img src="images/portfolio-bazen-okrasna-vysadba.jpg" alt="Okolí bazénu"></div>
+          <div class="blog-meta"><span>Realizace</span><span>9 min</span></div>
+          <h3>Bazénové okolí — co řešit dřív, než položíte dlažbu</h3>
+          <p>Projekt okolí bazénu se neobejde bez plánu. Vodicí linie, materiály, drenáže a osvětlení — vše, co byste měli zvážit ještě před začátkem prací.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============== BLOG DETAIL PAGE ============== -->
+<section class="page" id="page-blog-detail" data-page-id="blog-detail">
+  <article class="blog-detail">
+    <div class="container">
+      <header class="blog-detail-header">
+        <span class="eyebrow center">Údržba</span>
+        <h1 id="blogDetailTitle">Jak mít trvanlivý trávník i v období sucha</h1>
+        <div class="blog-detail-meta">
+          <span>Květen 2026</span>
+          <span>8 min čtení</span>
+          <span>MTGarden</span>
+        </div>
+      </header>
+      <div class="blog-detail-hero" id="blogDetailHero">
+        <img src="images/portfolio-secani-trav-po.jpg" alt="">
+      </div>
+      <div class="blog-content" id="blogContent">
+
+        <p>Krásný a hustý trávník není věc náhody. Je výsledkem promyšleného plánu, který kombinuje správný výběr osiva, pravidelnou údržbu a respekt k sezónním potřebám trávy. V tomto článku shrnujeme, co se nám v praxi <strong>na desítkách realizací</strong> osvědčilo, a jak připravit svůj trávník na stále teplejší a sušší letní měsíce.</p>
+
+        <h2>Jaro je rozhodující</h2>
+        <p>Začneme tím, že většina chyb, které se v létě „projeví“ jako žluté skvrny a prořídlé plochy, vznikne už v březnu a dubnu. Pokud na jaře zanedbáte vertikutaci, plsť pod travním drnem zadrží vlhkost na povrchu a kořeny zůstanou mělké. V létě pak takový trávník vyschne při prvním delším horku.</p>
+
+        <p>V praxi doporučujeme tento jarní postup:</p>
+        <ul>
+          <li>Vyhrabat starou plsť — ručními hráběmi nebo strojovou vertikutací podle velikosti plochy.</li>
+          <li>Aplikovat startovací hnojivo s vyšším obsahem dusíku, ideálně formou pomalu se uvolňujících granulí.</li>
+          <li>Provzdušnit půdu (aerifikace) — drobné otvory v drnu zlepší prokořenění a zadržování vody.</li>
+          <li>Provést dosev v místech, kde se za zimu trávník protrhal.</li>
+        </ul>
+
+        <h2>Letní režim — sečení, zálivka, mulčování</h2>
+        <p>Když přijdou tropické dny, pravidla se mění. Trávník <strong>nesekejte nakrátko</strong>. Vyšší stéblo (8–10 cm) chrání kořeny před přehřátím a zadržuje v půdě více vlhkosti. Pokud jezdíte sekačkou s mulčovacím nožem, vracíte navíc do trávníku přírodní hnojivo v podobě jemně nasekané hmoty.</p>
+
+        <blockquote>„V suchém létě raději sečte výš a méně často. Stresujete trávu mnohem méně než při intenzivním krátkém sečení každý víkend.“</blockquote>
+
+        <p>Zálivka by měla být <strong>vydatná, ale méně častá</strong>. Krátká povrchová zálivka jen probudí houbové choroby a kořeny zůstanou nahoře. Pravidlo, které funguje: jednou za 5–7 dní 25–35 litrů na metr čtvereční, ideálně brzy ráno.</p>
+
+        <h2>Podzim — investice do příští sezóny</h2>
+        <p>Co uděláte v září a říjnu, vrátí se vám příští rok. Podzimní hnojení s vyšším obsahem draslíku posílí kořeny před zimou. Sběr listí brání zaplísnění a poslední sečení (na výšku 5 cm) připraví trávník na klidové období.</p>
+
+        <h3>Když je sucho extrémní</h3>
+        <p>V opravdu suchých obdobích je v pořádku, když trávník na pár týdnů zežloutne. Tráva má vyvinutý mechanismus dormance — uschne, ale kořeny zůstanou živé. Po prvním vydatnějším dešti regeneruje sama. Důležité je <strong>v této fázi nesekat</strong> a nepoužívat hnojiva.</p>
+
+        <h2>Profesionální údržba s vlastní technikou</h2>
+        <p>Všechny tyto zásahy provádíme v rámci našich servisních smluv pro klienty z Prahy a Středočeského kraje. Disponujeme vlastním strojovým parkem (mulčovač s traktorem, profesionální sekačky, vertikutátor, aerifikátor), takže nepotřebujeme externí dodavatele a můžeme garantovat termíny i kvalitu provedení.</p>
+
+        <p>Pokud uvažujete o pravidelné péči o váš trávník nebo potřebujete <strong>jednorázový zásah</strong> (jarní úprava, podzimní příprava na zimu, regenerace po suchu), ozvěte se nám — domluvíme nezávaznou konzultaci přímo u vás.</p>
+
+      </div>
+      <div class="blog-back">
+        <a class="btn-ghost" data-page="blog" href="#blog">← Zpět na blog</a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============== KONTAKT PAGE ============== -->
+<section class="page" id="page-kontakt" data-page-id="kontakt">
+  <div class="page-hero">
+    <div class="container page-hero-content">
+      <div class="page-hero-top">
+        <span class="eyebrow">Kontakt</span>
+        <span class="page-hero-meta">Praha · Středočeský kraj</span>
+      </div>
+      <div class="page-hero-main">
+        <h1>Pojďme <span class="italic">tvořit</span></h1>
+        <div class="page-hero-aside">
+          <p>Konzultace na vašem pozemku je zdarma a nezávazná. Přijedeme, posoudíme prostor a sepíšeme nabídku na míru.</p>
+        </div>
+      </div>
+    </div>
+    <span class="page-hero-bg-mark">05</span>
+  </div>
+
+  <section class="kontakt-section">
+    <div class="container">
+      <div class="kontakt-grid">
+
+        <div class="kontakt-info reveal">
+          <span class="eyebrow">Spojení</span>
+          <h2>Praha &amp; <span class="italic">Středočeský kraj</span></h2>
+          <p>Pracujeme po celém Středočeském kraji a Praze. Pro projekty mimo region nás kontaktujte — domluvíme individuální podmínky.</p>
+
+          <div class="kontakt-list">
+
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1 0 2 1 2 2v12c0 1-1 2-2 2H4c-1 0-2-1-2-2V6c0-1 1-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+              </div>
+              <div>
+                <div class="kontakt-item-label">Email</div>
+                <div class="kontakt-item-value"><a href="mailto:mtzahrady@seznam.cz">mtzahrady@seznam.cz</a></div>
+              </div>
+            </div>
+
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="kontakt-item-label">Tomáš Frajer</div>
+                <div class="kontakt-item-value"><a href="tel:+420723289177">+420 723 289 177</a></div>
+                <div class="kontakt-item-value-sub">Realizace &amp; konzultace</div>
+              </div>
+            </div>
+
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="kontakt-item-label">Martin Srba</div>
+                <div class="kontakt-item-value"><a href="tel:+420607010708">+420 607 010 708</a></div>
+                <div class="kontakt-item-value-sub">Údržba &amp; technika</div>
+              </div>
+            </div>
+
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="kontakt-item-label">Působnost</div>
+                <div class="kontakt-item-value">Praha a Středočeský kraj</div>
+                <div class="kontakt-item-value-sub">IČO: 07885199</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <form class="kontakt-form reveal" id="kontaktForm">
+          <h3>Napište nám</h3>
+          <p>Ozveme se vám zpravidla do 24 hodin v pracovní dny.</p>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="kf-name">Jméno</label>
+              <input type="text" id="kf-name" name="name" required>
+            </div>
+            <div class="form-field">
+              <label for="kf-phone">Telefon</label>
+              <input type="tel" id="kf-phone" name="phone">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="kf-email">Email</label>
+            <input type="email" id="kf-email" name="email" required>
+          </div>
+          <div class="form-field">
+            <label for="kf-message">Zpráva</label>
+            <textarea id="kf-message" name="message" placeholder="Stručně popište, co plánujete, kde se nachází pozemek a jaké máte představy…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Odeslat poptávku <span class="arrow">→</span></button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">
+          <span class="logo-mark">M</span>
+          <span><b>MT</b>garden</span>
+        </div>
+        <p class="footer-tagline">Zahradní architektura, výsadba, kácení a údržba zahrad. Praha a Středočeský kraj.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigace</h4>
+        <ul>
+          <li><a data-page="home" href="#home">Domů</a></li>
+          <li><a data-page="portfolio" href="#portfolio">Portfolio</a></li>
+          <li><a data-page="sluzby" href="#sluzby">Služby</a></li>
+          <li><a data-page="blog" href="#blog">Blog</a></li>
+          <li><a data-page="kontakt" href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <div class="footer-contact-line"><a href="mailto:mtzahrady@seznam.cz">mtzahrady@seznam.cz</a></div>
+        <div class="footer-contact-line"><strong>Tomáš Frajer:</strong> +420 723 289 177</div>
+        <div class="footer-contact-line"><strong>Martin Srba:</strong> +420 607 010 708</div>
+        <div class="footer-contact-meta">Praha a Středočeský kraj<br>IČO: 07885199</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MTGarden — všechna práva vyhrazena.</span>
+      <span>Made with care.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a class="whatsapp-fab" href="https://wa.me/420723289177" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  WhatsApp
+</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Zavřít">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Předchozí">←</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Další">→</button>
+  <span class="lightbox-counter" id="lightboxCounter"></span>
+  <div class="lightbox-img-wrap"><img id="lightboxImg" src="" alt=""></div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+/* ======================================================
+   PAGE ROUTING
+====================================================== */
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('[data-page]');
+
+function showPage(pageId, scroll = true) {
+  pages.forEach(p => p.classList.toggle('active', p.dataset.pageId === pageId));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
+  // Set body class so nav and other elements can adapt per page
+  document.body.className = document.body.className.replace(/\bpage-[\w-]+\b/g, '').trim();
+  document.body.classList.add('page-' + pageId);
+  if (scroll) window.scrollTo({ top: 0, behavior: 'instant' });
+  document.body.classList.remove('menu-open');
+  document.body.classList.toggle('dark-cursor', false);
+  // Re-trigger reveal animations on the active page
+  setTimeout(setupReveal, 60);
+}
+
+function getPageFromHash() {
+  const hash = (location.hash || '#home').replace('#', '');
+  if (hash.startsWith('blog/')) return { id: 'blog-detail', slug: hash.split('/')[1] };
+  return { id: hash };
+}
+
+function applyRoute() {
+  const { id, slug } = getPageFromHash();
+  const valid = ['home','portfolio','sluzby','blog','kontakt','blog-detail'];
+  const target = valid.includes(id) ? id : 'home';
+  if (target === 'blog-detail') loadBlogDetail(slug);
+  showPage(target);
+}
+
+window.addEventListener('hashchange', applyRoute);
+
+document.querySelectorAll('[data-page]').forEach(el => {
+  el.addEventListener('click', e => {
+    const target = el.dataset.page;
+    if (!target) return;
+    e.preventDefault();
+    location.hash = '#' + target;
+  });
+});
+
+document.querySelectorAll('[data-blog]').forEach(el => {
+  el.addEventListener('click', e => {
+    const slug = el.dataset.blog;
+    if (!slug) return;
+    e.preventDefault();
+    location.hash = '#blog/' + slug;
+  });
+});
+
+/* ======================================================
+   BLOG DETAIL CONTENT
+====================================================== */
+const BLOG_POSTS = {
+  'trvanlivy-travnik': {
+    title: 'Jak mít trvanlivý trávník i v období sucha',
+    eyebrow: 'Údržba',
+    img: 'images/portfolio-secani-trav-po.jpg',
+    keep: true
+  },
+  'kdy-kacet-stromy': {
+    title: 'Kdy je nejlepší doba na kácení stromů?',
+    eyebrow: 'Kácení',
+    img: 'images/blog-zima-stromy.jpg',
+    body: `
+      <p>Otázka načasování kácení patří mezi nejčastější dotazy našich klientů. Odpověď není jednoznačná — záleží na druhu dřeviny, jejím stavu, přístupu a v neposlední řadě na <strong>správním povolení</strong>. V tomto článku shrnujeme, co všechno byste měli zvážit, než si na zahradě objednáte kácení.</p>
+      <h2>Vegetační klid je váš spojenec</h2>
+      <p>Pro většinu listnatých stromů platí, že nejvhodnější doba pro kácení je <strong>od listopadu do března</strong>. V tomto období je strom v klidovém režimu, neproudí v něm míza a riziko poškození kůry nebo přenosu houbových chorob je výrazně nižší.</p>
+      <p>Z praktického pohledu má zimní kácení další výhody:</p>
+      <ul>
+        <li>Strom nemá listy — vidíte přesně, jaké větve odstraňujete a jak strom dopadne.</li>
+        <li>Promrzlá půda lépe snese pojezd techniky (plošina, traktor s vlekem) bez poškození trávníku.</li>
+        <li>Méně okolní vegetace v plné síle — snáz se uklidí a odveze hmota.</li>
+        <li>Vy i vaši sousedé jste méně rušeni v období, kdy zahradu aktivně neužíváte.</li>
+      </ul>
+      <h2>Kdy se naopak kácet nemá</h2>
+      <p>Existují období, kdy kácení důrazně nedoporučujeme. Hlavní z nich je <strong>hnízdní období ptáků</strong>, tedy od dubna do konce června. V některých případech (zákonem chráněné druhy, alej, památné stromy) je kácení v této době přímo zakázáno.</p>
+      <blockquote>„Když je strom plný hnízd a mláďat, kácení je nejen problematické z hlediska zákona, ale i naší profesní cti. V tomto období řešíme jen havarijní zásahy.“</blockquote>
+      <h2>Povolení od úřadu — co řeší občan</h2>
+      <p>Podle zákona o ochraně přírody potřebujete povolení od obecního úřadu pro stromy s <strong>obvodem kmene nad 80 cm</strong> ve výšce 130 cm nad zemí. Bez povolení můžete kácet:</p>
+      <ul>
+        <li>Stromy s menším obvodem než 80 cm.</li>
+        <li>Ovocné stromy na pozemku, kde stojí dům určený k bydlení.</li>
+        <li>Dřeviny s havarijním stavem (po doložení).</li>
+      </ul>
+      <h2>Jak vám můžeme pomoci</h2>
+      <p>V MTGarden zajišťujeme komplexní servis: od posouzení stromu přes případnou žádost o povolení až po samotné kácení s plošinou (Boels), uklizení a <strong>odvoz dřeva i větví</strong>. Pracujeme po celém Středočeském kraji a Praze. Máme vlastní techniku, takže reagujeme rychle a bez subdodavatelů.</p>
+      <p>Pokud máte na zahradě strom, který vám dělá starosti, ozvěte se. Konzultace je zdarma a nezávazná.</p>
+    `
+  },
+  'sterkovy-zahon': {
+    title: 'Štěrkový záhon krok za krokem',
+    eyebrow: 'Design',
+    img: 'images/portfolio-bazen-stetkove-zahony.jpg',
+    body: `
+      <p>Štěrkový záhon je jedním z nejhezčích a zároveň nejpraktičtějších prvků moderní zahrady. Spojuje minimalistickou estetiku s extrémně nízkou údržbou — pokud je <strong>správně založen</strong>. Klíč ke stálé kráse leží v prvních centimetrech pod povrchem.</p>
+      <h2>1. Návrh tvaru a kompozice</h2>
+      <p>Začínáme vždy návrhem na papíře (nebo v 3D programu pro větší realizace). Štěrkový záhon by měl mít plynulou křivku, která navazuje na ostatní prvky zahrady — terasu, bazén, oblouk trávníku. Geometrické tvary fungují u moderních domů, organické křivky u rustikálních zahrad.</p>
+      <p>Ve fázi návrhu řešíme:</p>
+      <ul>
+        <li>Hraniční linii — kde přesně bude obrubník.</li>
+        <li>Kompozici dřevin — počet, druh, výškové patro.</li>
+        <li>Barvu a frakci štěrku — od bílého mramoru přes světle béžový po antracit.</li>
+        <li>Integraci osvětlení (pokud má být součástí).</li>
+      </ul>
+      <h2>2. Příprava podloží</h2>
+      <p>Toto je krok, který rozhoduje o životnosti záhonu. Plochu odplevelíme, srovnáme a <strong>zhutníme</strong>. U větších záhonů často zakládáme drenáž — vrstvu hrubšího kameniva pro odvod vody, aby pod štěrkem nestála vlhkost a nerozvíjely se houby.</p>
+      <h2>3. Obrubník — preciznost je všechno</h2>
+      <p>Obrubník není jen estetický prvek. Funguje jako bariéra mezi trávníkem a štěrkem, brání zarůstání kořenů z trávníku do záhonu a usnadňuje sečení. Nejčastěji používáme <strong>betonové obrubníky</strong> usazené do betonového lože, které vydrží i pojezd zahradní techniky.</p>
+      <h2>4. Geotextilie</h2>
+      <p>Kvalitní geotextilie (gramáž alespoň 100 g/m²) je nepostradatelná. Propouští vodu, ale brání plevelu prorazit zespodu a štěrku zapadat do hlíny. U levných záhonů se na tomhle šetří — a po dvou letech se majitel diví, proč mu mezi kameny rostou kopřivy.</p>
+      <h2>5. Výsadba a finální kameny</h2>
+      <p>Než nasypeme štěrk, vysadíme dřeviny — nejčastěji nízké jehličnany (borovice kleč, smrk Conica), trávy (kavyl, ostřice) a kvetoucí trvalky (vřesovce, levandule). Kolem každé sazenice opatrně rozhrneme štěrk do <strong>vrstvy 5–7 cm</strong>.</p>
+      <blockquote>„Štěrkový záhon, který vidíte na fotce po pěti letech, vypadá stejně jako den po realizaci. To je rozdíl mezi profesionálním založením a improvizací.“</blockquote>
+      <h2>Co s tím dál</h2>
+      <p>Údržba štěrkového záhonu je minimální — sem tam vyplít náletové dřeviny, jednou za 3–4 roky doplnit štěrk a postříhat trvalky. Pokud uvažujete o štěrkovém záhonu u sebe, ozvěte se — rádi přijedeme na konzultaci a navrhneme řešení přesně pro vaši zahradu.</p>
+    `
+  },
+  'bazenove-okoli': {
+    title: 'Bazénové okolí — co řešit dřív, než položíte dlažbu',
+    eyebrow: 'Realizace',
+    img: 'images/portfolio-bazen-okrasna-vysadba.jpg',
+    body: `
+      <p>Realizace okolí bazénu je jeden z nejnáročnějších projektů v zahradní architektuře. Spojuje stavební prvky (dlažba, beton, drenáže) s vegetací, vodou a každodenním užíváním rodiny. Pokud něco zanedbáte v první fázi, opravy jsou drahé a často destruktivní. Pojďme si projít, co by mělo být <strong>na papíře</strong> ještě dřív, než přijde první bagr.</p>
+      <h2>1. Voda musí někam odtéct</h2>
+      <p>Začneme tím nejméně atraktivním, ale nejdůležitějším bodem: <strong>drenážním systémem</strong>. Bazénové okolí je trvale namáháno odstřikující vodou, deštěm i zimní vlhkostí. Bez funkční drenáže se za pár let propadne dlažba, popraskají obrubníky a u zahradního domku vyroste plíseň.</p>
+      <p>Standardně řešíme:</p>
+      <ul>
+        <li>Liniový žlab kolem celého bazénu nebo alespoň na nejnižší straně.</li>
+        <li>Bodové gully tam, kde se nedá odvodit liniově.</li>
+        <li>Zatravňovací rošt v místech přechodu mezi terasou a trávníkem.</li>
+        <li>Spádování betonové desky 1,5–2 % směrem od bazénu.</li>
+      </ul>
+      <h2>2. Materiály — co vydrží UV, mráz a chlór</h2>
+      <p>U dlažby řešíme hlavně <strong>protiskluznost</strong> (R11 a vyšší), barvostálost a mrazuvzdornost. Velkoformátové betonové dlaždice 60×60 nebo 80×80 dnes vypadají moderně a jsou cenově dostupné. Přírodní kámen (žula, čedič) je nadčasový, ale dražší.</p>
+      <blockquote>„Klient si často vybere dlažbu podle showroomu, kde svítí žárovka. Doporučujeme mu vždy vidět vzorek venku, na slunci a po polití vodou.“</blockquote>
+      <h2>3. Přechody — kde končí dlažba a začíná zahrada</h2>
+      <p>Přechod z dlažby do trávníku je vizuálně klíčový. Často používáme <strong>štěrkový pás</strong> (10–30 cm široký) ohraničený betonovým obrubníkem. Drží trávu mimo bazén, brání zarůstání spár a vizuálně rozlamuje plochu.</p>
+      <h2>4. Výsadba — co k bazénu ano a co ne</h2>
+      <p>Obecné pravidlo: <strong>žádné stromy, které pouští listí přímo do vody</strong>. Vyhněte se javorům, lípám a břízám v blízkosti zrcadla. Naopak skvěle fungují:</p>
+      <ul>
+        <li>Stálezelené jehličnany v pozadí (borovice černá, smrk omorika).</li>
+        <li>Okrasné trávy (kavyl, modrooké).</li>
+        <li>Levandule, šalvěj, máta — voní a odpuzují hmyz.</li>
+        <li>Kompaktní keře (samšis, tavolník nízký).</li>
+      </ul>
+      <h2>5. Osvětlení — atmosféra po západu slunce</h2>
+      <p>Nepodceňujte osvětlení. LED pásky pod horní hranou bazénu, nízká LED svítidla podél dlažby a několik bodových svítidel v záhonech promění obyčejnou zahradu ve <strong>scénu jako z hotelu</strong>. Kabely je samozřejmě potřeba položit ještě před dlažbou.</p>
+      <h2>Závěr</h2>
+      <p>Realizace okolí bazénu trvá u rodinného domu typicky 3–6 týdnů. Vyplatí se naplánovat ji na podzim po sezóně, kdy nemusíte řešit kupu hosty. V MTGarden zvládneme celý proces od projektu přes stavební část po výsadbu a kolaudaci. Pokud uvažujete o úpravě svého bazénového okolí, ozvěte se — rádi přijedeme na nezávaznou konzultaci.</p>
+    `
+  }
+};
+
+function loadBlogDetail(slug) {
+  const post = BLOG_POSTS[slug] || BLOG_POSTS['trvanlivy-travnik'];
+  const titleEl = document.getElementById('blogDetailTitle');
+  const heroEl = document.querySelector('#blogDetailHero img');
+  const eyebrowEl = document.querySelector('#page-blog-detail .eyebrow');
+  const contentEl = document.getElementById('blogContent');
+  if (titleEl) titleEl.textContent = post.title;
+  if (heroEl && post.img) heroEl.src = post.img;
+  if (eyebrowEl && post.eyebrow) eyebrowEl.textContent = post.eyebrow;
+  if (contentEl && post.body) contentEl.innerHTML = post.body;
+  // For 'trvanlivy-travnik' the content is hardcoded in HTML, leave it.
+}
+
+/* ======================================================
+   NAV SCROLL STATE
+====================================================== */
+const nav = document.getElementById('nav');
+function onScroll() {
+  if (window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ======================================================
+   MOBILE MENU
+====================================================== */
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.body.classList.toggle('menu-open');
+});
+
+/* ======================================================
+   CUSTOM CURSOR
+====================================================== */
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-outline');
+let mx = 0, my = 0, ox = 0, oy = 0;
+window.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursorDot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+  if (!document.body.classList.contains('cursor-active')) {
+    document.body.classList.add('cursor-active');
+  }
+});
+function animateCursor() {
+  ox += (mx - ox) * 0.18;
+  oy += (my - oy) * 0.18;
+  cursorOutline.style.transform = `translate(${ox}px, ${oy}px) translate(-50%, -50%)`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+const hoverables = 'a, button, [data-lightbox], [data-blog], .featured-card, .portfolio-item, .blog-card, .ba-slider';
+document.addEventListener('mouseover', e => {
+  if (e.target.closest(hoverables)) document.body.classList.add('cursor-hover');
+  if (e.target.matches('input, textarea, [contenteditable]')) document.body.classList.add('cursor-text');
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.closest(hoverables)) document.body.classList.remove('cursor-hover');
+  if (e.target.matches('input, textarea, [contenteditable]')) document.body.classList.remove('cursor-text');
+});
+
+/* Dark cursor on dark sections */
+function checkDarkSections() {
+  const darkSections = document.querySelectorAll('.philosophy, .footer, .page-hero, .hero, .cta-banner');
+  let onDark = false;
+  darkSections.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (my >= r.top && my <= r.bottom && mx >= r.left && mx <= r.right) onDark = true;
+  });
+  document.body.classList.toggle('dark-cursor', onDark);
+  requestAnimationFrame(checkDarkSections);
+}
+checkDarkSections();
+
+/* ======================================================
+   SCROLL REVEAL
+====================================================== */
+function setupReveal() {
+  // Activate JS-reveal mode (CSS will hide reveal items)
+  document.body.classList.add('js-reveal');
+  const items = document.querySelectorAll('.page.active .reveal, .page.active .reveal-stagger');
+
+  // Immediately show items already in viewport
+  items.forEach(item => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 1.05 && rect.bottom > 0) {
+      item.classList.add('in');
+    }
+  });
+
+  // Observer for items below the fold
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+
+  items.forEach(item => {
+    if (!item.classList.contains('in')) observer.observe(item);
+  });
+
+  // Safety net: if anything is still hidden after 3 seconds, show it
+  setTimeout(() => {
+    items.forEach(item => item.classList.add('in'));
+  }, 3000);
+}
+
+/* ======================================================
+   STAT COUNTER
+====================================================== */
+function animateCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  counters.forEach(c => {
+    if (c.dataset.animated) return;
+    const target = parseInt(c.dataset.count);
+    const isPercent = c.textContent.includes('%') || c.parentElement.textContent.includes('%');
+    let current = 0;
+    const duration = 1800;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      c.textContent = Math.floor(current) + (target === 150 ? '+' : '');
+    }, 16);
+    c.dataset.animated = '1';
+  });
+}
+
+const heroObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) animateCounters(); });
+}, { threshold: 0.4 });
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) heroObserver.observe(heroStats);
+
+/* ======================================================
+   PORTFOLIO FILTERS
+====================================================== */
+const filters = document.querySelectorAll('.portfolio-filter');
+filters.forEach(f => {
+  f.addEventListener('click', () => {
+    filters.forEach(x => x.classList.remove('active'));
+    f.classList.add('active');
+    const cat = f.dataset.filter;
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const match = cat === 'all' || item.dataset.cat === cat;
+      item.classList.toggle('hidden', !match);
+    });
+  });
+});
+
+/* ======================================================
+   LIGHTBOX — supports project galleries
+====================================================== */
+const PROJECT_GALLERIES = {
+  'bazenova-zona': [
+    {img: 'hero-bazenova-zona.jpg', caption: 'Bazénová relaxační zóna'}
+  ],
+  'prirodni-zahrada': [
+    {img: 'portfolio-zahrada-prirodni.jpg', caption: 'Přírodní zahrada s mulčovým záhonem'}
+  ],
+  'mulcovy-zahon': [
+    {img: 'portfolio-zahrada-mulcovy-zahon.jpg', caption: 'Mulčový záhon s rozkvětem'}
+  ],
+  'sterkova-cestka': [
+    {img: 'portfolio-bila-cestka-jehlicnany.jpg', caption: 'Štěrková plocha s jehličnany'}
+  ],
+  'zahon-u-schodu': [
+    {img: 'portfolio-zahon-u-schodu.jpg', caption: 'Záhon u schodů s ozdobnými keři'}
+  ],
+  'kaceni-jasanu': [
+    {img: 'portfolio-jasan-pri-praci.jpg', caption: 'Rizikové kácení jasanu — výsledek'}
+  ],
+  'kaceni-lipy-plosina': [
+    {img: 'portfolio-kaceni-plosina-akce.jpg', caption: 'Kácení vzrostlé lípy z plošiny'}
+  ],
+  'plosina-akce-jasan': [
+    {img: 'portfolio-strom-stena.jpg', caption: 'Plošina v akci — práce na koruně stromu'}
+  ],
+  'uklid-po-kaceni': [
+    {img: 'portfolio-jasan-vybaveni.jpg', caption: 'Úklid po kácení — VW Transporter a Boels plošina'}
+  ],
+  'okrasny-sterk': [
+    {img: 'portfolio-sterkovy-zahon-2.jpg', caption: 'Okrasný štěrkový záhon s jehličnany'}
+  ],
+  'secani-trav': [
+    {img: 'portfolio-secani-trav-po.jpg', caption: 'Sečení trávní plochy — výsledek'}
+  ],
+  'udrzba-zahrady': [
+    {img: 'portfolio-udrzba-zivy-plot.jpg', caption: 'Stříhání živých plotů — tvarované topiary'}
+  ],
+  'vykopove-prace': [
+    {img: 'portfolio-vykop-bagr.jpg', caption: 'Výkopové práce — JCB při kopání rýhy'}
+  ],
+  'doprava-techniky': [
+    {img: 'technika-bagr-prepravnik.jpg', caption: 'Doprava techniky — VW Transporter + JCB 8016'}
+  ],
+  'linie-haly': [
+    {img: 'portfolio-firemni-areal-vysadba.jpg', caption: 'Liniová výsadba podél haly'}
+  ],
+  'pole-uprava': [
+    {img: 'portfolio-pole-uprava.jpg', caption: 'Úprava liniové výsadby u pole'}
+  ],
+  'zimni-cisteni': [
+    {img: 'portfolio-zimni-cisteni.jpg', caption: 'Zimní vyčištění porostu'}
+  ]
+};
+
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+const lbCaption = document.getElementById('lightboxCaption');
+const lbCounter = document.getElementById('lightboxCounter');
+const lbPrevBtn = document.getElementById('lightboxPrev');
+const lbNextBtn = document.getElementById('lightboxNext');
+let lbGallery = [];
+let lbIndex = 0;
+
+function openLightbox(target) {
+  const galleryKey = target.dataset.gallery;
+  if (galleryKey && PROJECT_GALLERIES[galleryKey]) {
+    lbGallery = PROJECT_GALLERIES[galleryKey];
+  } else if (target.dataset.lightbox) {
+    // Fallback for items with single image (data-lightbox)
+    lbGallery = [{img: target.dataset.lightbox, caption: target.dataset.caption || ''}];
+  } else {
+    return;
+  }
+  lbIndex = 0;
+  showLb();
+  lightbox.classList.add('open');
+  // Show navigation only when multiple photos
+  const multi = lbGallery.length > 1;
+  lbPrevBtn.style.display = multi ? 'flex' : 'none';
+  lbNextBtn.style.display = multi ? 'flex' : 'none';
+  if (lbCounter) lbCounter.style.display = multi ? 'block' : 'none';
+  document.body.style.overflow = 'hidden';
+}
+
+function showLb() {
+  const item = lbGallery[lbIndex];
+  if (!item) return;
+  lbImg.src = 'images/' + item.img;
+  lbCaption.textContent = item.caption || '';
+  if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${lbGallery.length}`;
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function nextLb() {
+  if (lbGallery.length <= 1) return;
+  lbIndex = (lbIndex + 1) % lbGallery.length;
+  showLb();
+}
+function prevLb() {
+  if (lbGallery.length <= 1) return;
+  lbIndex = (lbIndex - 1 + lbGallery.length) % lbGallery.length;
+  showLb();
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest('[data-gallery], [data-lightbox]');
+  if (!trigger) return;
+  // Slider cards (baswap) show everything inline — no lightbox needed
+  if (trigger.classList.contains('baswap')) return;
+  e.preventDefault();
+  openLightbox(trigger);
+});
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lbNextBtn.addEventListener('click', nextLb);
+lbPrevBtn.addEventListener('click', prevLb);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') nextLb();
+  if (e.key === 'ArrowLeft') prevLb();
+});
+
+/* ======================================================
+   BEFORE/AFTER SLIDER
+====================================================== */
+document.querySelectorAll('[data-ba]').forEach(slider => {
+  const after = slider.querySelector('.ba-after');
+  const handle = slider.querySelector('.ba-handle');
+  let dragging = false;
+  function setPos(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+    handle.style.left = pct + '%';
+  }
+  slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+  window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+  window.addEventListener('mouseup', () => dragging = false);
+  slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+  slider.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+  slider.addEventListener('touchend', () => dragging = false);
+});
+
+/* ======================================================
+   PORTFOLIO BASWAP — mouse follows, auto-cycle when not hovered
+====================================================== */
+document.querySelectorAll('.portfolio-item.baswap').forEach(item => {
+  const before = item.querySelector('.ba-before');
+  const divider = item.querySelector('.ba-divider');
+  const imgWrap = item.querySelector('.portfolio-img');
+  if (!before || !divider || !imgWrap) return;
+
+  function setSliderPos(pct) {
+    pct = Math.max(2, Math.min(98, pct));
+    before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    divider.style.left = pct + '%';
+  }
+
+  imgWrap.addEventListener('mouseenter', () => {
+    item.classList.add('is-interactive');
+  });
+  imgWrap.addEventListener('mousemove', (e) => {
+    const rect = imgWrap.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    setSliderPos(x);
+  });
+  imgWrap.addEventListener('mouseleave', () => {
+    item.classList.remove('is-interactive');
+    // Reset to defaults (CSS animation takes over)
+    before.style.clipPath = '';
+    divider.style.left = '';
+  });
+});
+
+/* ======================================================
+   FORM
+====================================================== */
+const kontaktForm = document.getElementById('kontaktForm');
+if (kontaktForm) {
+  kontaktForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = new FormData(kontaktForm);
+    const name = data.get('name');
+    const email = data.get('email');
+    const phone = data.get('phone') || '';
+    const message = data.get('message') || '';
+    const subject = encodeURIComponent('Poptávka z webu — ' + name);
+    const body = encodeURIComponent(`Jméno: ${name}\nTelefon: ${phone}\nEmail: ${email}\n\nZpráva:\n${message}`);
+    window.location.href = `mailto:mtzahrady@seznam.cz?subject=${subject}&body=${body}`;
+  });
+}
+
+/* ======================================================
+   INIT
+====================================================== */
+applyRoute();
+setupReveal();
+
+</script>
+</body>
+</html>
